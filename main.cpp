@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <ctime>
+#include <chrono>
 
 void test0();
 void test1(int time);
@@ -37,7 +37,43 @@ int main()
 
 void testType0()
 {
+    std::string alphabet= "abcdefghijklmnopqrstuvwxyz";
+    std::string input;
+    char        error{0};
 
+    std::cout << "\nAlphabet Typing Test! Type the alphabet as fast as you can:\n$ ";
+        std::chrono::time_point<std::chrono::system_clock> timeStart = std::chrono::system_clock::now();
+    std::cin >>  input;
+        std::chrono::time_point<std::chrono::system_clock> timeEnd = std::chrono::system_clock::now();
+
+    for (int i{0}; i < 26; i++)
+    {
+        if(input[i] != alphabet[i])
+        {
+            std::cout << "\nInstead of typing " << alphabet[i] << ", you typed ";
+            
+            if(input.length() != 26)
+            {
+                std::cout << "nothing." << std::endl;
+            }
+            else
+            {
+                std::cout << input[i] << "." << std::endl;
+            }
+
+            error++;
+            break;
+        }
+    }
+    if(error == 0)
+    {
+        std::cout << "\nYou had no errors!" << std::endl;
+    }
+    
+    auto difference= std::chrono::duration_cast<std::chrono::milliseconds>(timeEnd - timeStart);
+    std::cout << "It took you " << static_cast<float>(difference.count()) /1000.0 << " seconds to finish." << std::endl;
+    
+    exit(0);
 }
 
 void testType1()
@@ -123,4 +159,5 @@ int stringToInt(char character)
     default: return 0;
     }
 }
+//Unfinished
 int calculateScore(char charTyped){return 0;}
