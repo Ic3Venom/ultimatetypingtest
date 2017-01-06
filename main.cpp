@@ -155,7 +155,6 @@ int stringToInt(char character)
     case 55: return 7;
     case 56: return 8;
     case 57: return 9;
-    case 58: return 10;
     default: return 0;
     }
 }
